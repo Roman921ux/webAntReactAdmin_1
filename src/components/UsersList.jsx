@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { List, Datagrid, TextField, EmailField } from 'react-admin';
+import { List, Datagrid, TextField, EmailField, Edit, SimpleForm, TextInput, Create } from 'react-admin';
 
-const UsersList = (props) => (
+export const UsersList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
@@ -12,4 +12,27 @@ const UsersList = (props) => (
   </List>
 );
 
-export default UsersList;
+const UserTitle = ({ record }) => {
+  return <span>User {record ? `"${record.name}"` : ''}</span>;
+};
+
+export const UserEdit = (props) => (
+  <Edit title={<UserTitle />} {...props}>
+    <SimpleForm>
+      <TextInput disabled source="id" />
+      <TextInput source="name" />
+      <TextInput source="email" />
+      <TextInput source="phone" />
+    </SimpleForm>
+  </Edit>
+);
+
+export const UserCreate = (props) => (
+  <Create {...props}>
+    <SimpleForm>
+      <TextInput source="name" />
+      <TextInput source="email" />
+      <TextInput source="phone" />
+    </SimpleForm>
+  </Create>
+);
